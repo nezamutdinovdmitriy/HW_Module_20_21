@@ -19,9 +19,8 @@ public class ShooterStrategy : MonoBehaviour
         {
             case ShotType.Explosion:
                 _iShooter = new ExplosionShot(_camera, _groundMask, new Raycaster(), 5, 10);
-                _iShooterView = new ExplosionShotView(_particleSystemPrefabs, _iShooter);
+                _iShooterView = new ExplosionShotView(_particleSystemPrefabs);
                 _iInput = new MouseInput(_camera);
-
 
                 _shooter.Initialized(_iShooter, _iShooterView, _iInput);
                 break;

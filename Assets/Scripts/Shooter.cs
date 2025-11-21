@@ -1,4 +1,3 @@
-using Cinemachine.Utility;
 using UnityEngine;
 
 public class Shooter : MonoBehaviour
