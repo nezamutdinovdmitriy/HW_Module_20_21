@@ -4,7 +4,6 @@ public class ExplosionShotView : IShooterView
 {
     private const float ReferenceParticleRadius = 5f; 
     private ParticleSystem _explosionVFX;
-    
 
     public ExplosionShotView(ParticleSystem particleSystem)
     {
