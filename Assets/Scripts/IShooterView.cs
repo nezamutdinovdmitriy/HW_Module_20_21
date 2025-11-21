@@ -2,6 +2,5 @@ using UnityEngine;
 
 public interface IShooterView
 {
-    public ParticleSystem ParticleSystem { get; }
-    public void ShowEffect();
+    public void PlayEffect(Vector3 position);
 }

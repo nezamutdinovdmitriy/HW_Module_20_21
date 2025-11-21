@@ -11,16 +11,19 @@ public class ShooterStrategy : MonoBehaviour
 
     private IShooter _iShooter;
     private IShooterView _iShooterView;
+    private IInput _iInput;
 
     private void Awake()
     {
         switch (_shotType)
         {
             case ShotType.Explosion:
-                _iShooter = new ExplosionShot(_camera, _groundMask, new MouseDragInput(_camera), new Raycaster(), 5, 10);
+                _iShooter = new ExplosionShot(_camera, _groundMask, new Raycaster(), 5, 10);
                 _iShooterView = new ExplosionShotView(_particleSystemPrefabs, _iShooter);
-                
-                _shooter.Initialized(_iShooter, _iShooterView);
+                _iInput = new MouseInput(_camera);
+
+
+                _shooter.Initialized(_iShooter, _iShooterView, _iInput);
                 break;
         }
     }

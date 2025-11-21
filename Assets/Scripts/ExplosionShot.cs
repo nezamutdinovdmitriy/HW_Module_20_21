@@ -8,30 +8,23 @@ public class ExplosionShot : IShooter
     private readonly float _explosionForce;
     private readonly LayerMask _mask;
 
-    private IDragInput _input;
     private IRaycaster _raycaster;
     
     public Vector3 HitPosition { get; private set; }
 
-    public bool IsShot { get; private set; }
-
-    public ExplosionShot(Camera camera, LayerMask groundMask, IDragInput input, IRaycaster raycaster, float explosionRadius, float explosionForce)
+    public ExplosionShot(Camera camera, LayerMask groundMask, IRaycaster raycaster, float explosionRadius, float explosionForce)
     {
-        _input = input;
         _raycaster = raycaster;
         _mask = groundMask;
         _explosionRadius = explosionRadius;
         _explosionForce = explosionForce;
     }
 
-    public void Shoot()
+    public void Shoot(Ray ray)
     {
-        if (_raycaster.Raycast(_input.PointerRay, _mask, out RaycastHit hitInfo))
+        if (_raycaster.Raycast(ray, _mask, out RaycastHit hitInfo))
         {
             HitPosition = hitInfo.point;
-
-            if (HitPosition != Vector3.zero)
-                IsShot = true;
 
             Collider[] targets = Physics.OverlapSphere(hitInfo.point, _explosionRadius);
 
@@ -50,6 +43,4 @@ public class ExplosionShot : IShooter
             }
         }
     }
-
-    public void ResetShot() => IsShot = false;
 }

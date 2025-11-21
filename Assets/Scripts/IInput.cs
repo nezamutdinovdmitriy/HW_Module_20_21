@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IDragInput
+public interface IInput
 {
     public bool IsDown { get; }
     public bool IsUp { get; }

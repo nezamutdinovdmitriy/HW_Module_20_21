@@ -12,8 +12,6 @@ public class Box : MonoBehaviour, IPushable
 
     public void Push(Vector3 direction, float force)
     {
-        //Rigidbody.MovePosition(direction * force);
-
         Rigidbody.AddForce(direction * force, ForceMode.Impulse);
     }
 }

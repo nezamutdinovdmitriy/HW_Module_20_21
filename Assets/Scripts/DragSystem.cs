@@ -6,14 +6,14 @@ public class DragSystem : MonoBehaviour
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private LayerMask _groundMask;
 
-    private IDragInput _input;
+    private IInput _input;
     private IRaycaster _raycaster;
     private ITargetSelector _targetSelector;
     private IMover _targetMover;
 
     private void Awake()
     {
-        _input = new MouseDragInput(_camera);
+        _input = new MouseInput(_camera);
         _raycaster = new Raycaster();
         _targetSelector = new RaycastTargetSelector(_raycaster, _targetMask);
         _targetMover = new GroundRaycastMover(_raycaster, _groundMask);

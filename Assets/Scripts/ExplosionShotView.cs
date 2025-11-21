@@ -3,17 +3,17 @@ using UnityEngine;
 public class ExplosionShotView : IShooterView
 {
     private IShooter _explosionShotLogic;
+    private ParticleSystem _explosionVFX;
 
     public ExplosionShotView(ParticleSystem particleSystem, IShooter explosionShotLogic)
     {
-        ParticleSystem = particleSystem;
+        _explosionVFX = particleSystem;
         _explosionShotLogic = explosionShotLogic;
     }
-    public ParticleSystem ParticleSystem { get; private set; }
 
-    public void ShowEffect()
+    public void PlayEffect(Vector3 position)
     {
-        ParticleSystem.Play();
-        _explosionShotLogic.ResetShot();
+        ParticleSystem explosion = Object.Instantiate(_explosionVFX, position, Quaternion.identity);
+        explosion.Play();
     }
 }
