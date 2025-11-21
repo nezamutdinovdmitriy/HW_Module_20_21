@@ -16,7 +16,7 @@ public class DragSystem : MonoBehaviour
         _input = new MouseDragInput(_camera);
         _raycaster = new Raycaster();
         _targetSelector = new RaycastTargetSelector(_raycaster, _targetMask);
-        _targetMover = new GroundRaycastMover(_raycaster, _groundMask, _targetSelector.Target);
+        _targetMover = new GroundRaycastMover(_raycaster, _groundMask);
     }
 
     private void Update()

@@ -5,7 +5,7 @@ public class GroundRaycastMover : IMover
     private readonly IRaycaster _raycaster;
     private readonly LayerMask _groundMask;
 
-    public GroundRaycastMover(IRaycaster raycaster, LayerMask groundMask, Transform target)
+    public GroundRaycastMover(IRaycaster raycaster, LayerMask groundMask)
     {
         _raycaster = raycaster;
         _groundMask = groundMask;
