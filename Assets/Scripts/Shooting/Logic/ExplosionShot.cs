@@ -11,6 +11,7 @@ public class ExplosionShot : IShooter
     private IRaycaster _raycaster;
     
     public Vector3 HitPosition { get; private set; }
+    public float Radius => _explosionRadius;
 
     public ExplosionShot(Camera camera, LayerMask groundMask, IRaycaster raycaster, float explosionRadius, float explosionForce)
     {

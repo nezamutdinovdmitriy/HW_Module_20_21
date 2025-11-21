@@ -18,7 +18,7 @@ public class Shooter : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             _shooter.Shoot(_input.PointerRay);
-            _shooterView.PlayEffect(_shooter.HitPosition);
+            _shooterView.PlayEffect(_shooter.HitPosition, _shooter.Radius);
         }
     }
 }
