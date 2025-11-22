@@ -2,27 +2,27 @@ using UnityEngine;
 
 public class ShooterStrategy : MonoBehaviour
 {
-    [SerializeField] private Shooter _shooter;
+    [SerializeField] private Shooter _shooterUser;
     [SerializeField] private Camera _camera;
     [SerializeField] private ParticleSystem _particleSystemPrefabs;
 
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private ShotType _shotType;
 
-    private IShooter _iShooter;
-    private IShooterView _iShooterView;
-    private IInput _iInput;
+    private IShooterType _shooter;
+    private IShooterView _shooterView;
+    private IInput _input;
 
     private void Awake()
     {
         switch (_shotType)
         {
             case ShotType.Explosion:
-                _iShooter = new ExplosionShot(_camera, _groundMask, new Raycaster(), 5, 10);
-                _iShooterView = new ExplosionShotView(_particleSystemPrefabs);
-                _iInput = new MouseInput(_camera);
+                _shooter = new ExplosionShot(_camera, _groundMask, new Raycaster(), 5, 10);
+                _shooterView = new ExplosionShotView(_particleSystemPrefabs);
+                _input = new MouseInput(_camera);
 
-                _shooter.Initialized(_iShooter, _iShooterView, _iInput);
+                _shooterUser.Initialized(_shooter, _shooterView, _input);
                 break;
         }
     }

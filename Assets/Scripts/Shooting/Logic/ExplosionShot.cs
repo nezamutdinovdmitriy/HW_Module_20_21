@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExplosionShot : IShooter
+public class ExplosionShot : IShooterType
 {
     private const float MaxMultiplier = 1f;
 

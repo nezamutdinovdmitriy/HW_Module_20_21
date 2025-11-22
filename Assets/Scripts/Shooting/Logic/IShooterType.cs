@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IShooter
+public interface IShooterType
 {
     public Vector3 HitPosition { get; }
 

@@ -1,6 +1,8 @@
-﻿public interface IDragable
+﻿using UnityEngine;
+
+public interface IDragable
 {
     public void Enter();
-    public void Process();
+    public void Drag(Vector3 position);
     public void Exit();
 }
