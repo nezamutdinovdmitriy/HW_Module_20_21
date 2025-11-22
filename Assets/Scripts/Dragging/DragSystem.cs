@@ -10,6 +10,7 @@ public class DragSystem : MonoBehaviour
     private IRaycaster _raycaster;
     private ITargetSelector _targetSelector;
     private IMover _targetMover;
+    private IDragable _dragable;
 
     private void Awake()
     {
@@ -22,12 +23,34 @@ public class DragSystem : MonoBehaviour
     private void Update()
     {
         if (_input.IsDown)
+        {
             _targetSelector.TrySelect(_input.PointerRay);
 
-        if (_input.IsUp)
-            _targetSelector.Clear();
+            if (_targetSelector.Target != null)
+            {
+                Rigidbody targetRigidBody = _targetSelector.Target.GetComponent<Rigidbody>();
 
+                if (targetRigidBody != null)
+                {
+                    _dragable = new RigidbodyDragable(targetRigidBody);
+                    _dragable.Enter();
+                }
+            }
+        }
+
+        if (_input.IsUp)
+        {
+            if (_dragable != null)
+            {
+                _dragable.Exit();
+            }
+            _targetSelector.Clear();
+        }
+    }
+
+    private void FixedUpdate()
+    {
         if (_targetSelector.Target != null)
-            _targetMover.MoveTo(_input.PointerRay, _targetSelector.Target);
+            _targetMover.MoveTo(_input.PointerRay, _dragable);
     }
 }

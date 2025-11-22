@@ -15,9 +15,6 @@ public class RaycastTargetSelector : ITargetSelector
 
     public void Clear()
     {
-        if(Target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody))
-            targetRigidbody.isKinematic = false;
-
         Target = null;
     }
 
