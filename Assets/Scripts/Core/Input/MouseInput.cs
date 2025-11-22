@@ -9,7 +9,7 @@ public class MouseInput : IInput
 
     public bool IsDown => Input.GetMouseButtonDown(0);
     public bool IsUp => Input.GetMouseButtonUp(0);
-    public bool IsShot => Input.GetMouseButtonUp(1);
+    public bool IsShot => Input.GetMouseButtonDown(1);
 
     
 }

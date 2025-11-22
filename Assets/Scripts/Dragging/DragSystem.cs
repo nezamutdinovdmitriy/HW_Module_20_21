@@ -44,6 +44,7 @@ public class DragSystem : MonoBehaviour
             {
                 _dragable.Exit();
             }
+            _dragable = null;
             _targetSelector.Clear();
         }
     }
