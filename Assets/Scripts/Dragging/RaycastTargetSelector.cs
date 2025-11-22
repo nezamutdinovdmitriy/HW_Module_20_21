@@ -13,7 +13,13 @@ public class RaycastTargetSelector : ITargetSelector
 
     public Transform Target { get; private set; }
 
-    public void Clear() => Target = null;
+    public void Clear()
+    {
+        if(Target.TryGetComponent<Rigidbody>(out Rigidbody targetRigidbody))
+            targetRigidbody.isKinematic = false;
+
+        Target = null;
+    }
 
     public bool TrySelect(Ray ray)
     {
