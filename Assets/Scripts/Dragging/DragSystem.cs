@@ -28,13 +28,10 @@ public class DragSystem : MonoBehaviour
 
             if (_targetSelector.Target != null)
             {
-                Rigidbody targetRigidBody = _targetSelector.Target.GetComponent<Rigidbody>();
+                _dragable = _targetSelector.Target.GetComponent<IDragable>();
 
-                if (targetRigidBody != null)
-                {
-                    _dragable = new RigidbodyDragable(targetRigidBody);
-                    _dragable.Enter();
-                }
+                if (_dragable != null)
+                _dragable.Enter();
             }
         }
 

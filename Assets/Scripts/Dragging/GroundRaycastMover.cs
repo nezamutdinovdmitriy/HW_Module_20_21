@@ -14,8 +14,6 @@ public class GroundRaycastMover : IMover
     public void MoveTo(Ray ray, IDragable target)
     {
         if(_raycaster.Raycast(ray, _groundMask, out RaycastHit hitInfo))
-        {
             target.Drag(hitInfo.point);
-        }
     }
 }

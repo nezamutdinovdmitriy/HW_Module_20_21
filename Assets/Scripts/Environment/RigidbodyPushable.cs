@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Box : MonoBehaviour, IPushable
+public class RigidbodyPushable : MonoBehaviour, IPushable
 {
     public Rigidbody Rigidbody { get; private set; }
 
