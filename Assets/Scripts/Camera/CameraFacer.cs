@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Rotator : MonoBehaviour
+public class CameraFacer : MonoBehaviour
 {
     private void Update() => transform.LookAt(Camera.main.transform);
 }

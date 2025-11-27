@@ -1,29 +1,20 @@
 using Cinemachine;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class CameraSwitcher : MonoBehaviour
+public class CameraSwitcher
 {
-    [SerializeField] private List<CinemachineVirtualCamera> _camerasList;
-
     private Queue<CinemachineVirtualCamera> _camerasQueue = new();
     private CinemachineVirtualCamera _currentCamera;
 
-    private void Awake()
+    public CameraSwitcher(List<CinemachineVirtualCamera> _camerasList)
     {
         foreach (CinemachineVirtualCamera camera in _camerasList)
             _camerasQueue.Enqueue(camera);
 
-        UpdateCamera();
+        SelectNextCamera();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-            UpdateCamera();
-    }
-
-    private void UpdateCamera()
+    public void SelectNextCamera()
     {
         _currentCamera = _camerasQueue.Dequeue();
         _camerasQueue.Enqueue(_currentCamera);
