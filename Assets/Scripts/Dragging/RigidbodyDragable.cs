@@ -28,7 +28,6 @@ public class RigidbodyDragable : MonoBehaviour, IDragable
     {
         if (_rigidbody.isKinematic != _isKinematic)
             _rigidbody.isKinematic = _isKinematic;
-
     }
 
     public void Drag(Vector3 position)

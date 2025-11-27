@@ -2,8 +2,8 @@ using UnityEngine;
 
 public interface IInput
 {
-    public bool IsDown { get; }
-    public bool IsUp { get; }
+    public bool IsDragStarted { get; }
+    public bool IsDragEnded { get; }
     public bool IsShot { get; }
-    public Ray PointerRay { get; }
+    public bool IsSwitchPressed { get; }
 }

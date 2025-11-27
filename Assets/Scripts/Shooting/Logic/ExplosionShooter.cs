@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExplosionShot : IShooterType
+public class ExplosionShooter : IShooter
 {
     private const float MaxMultiplier = 1f;
 
@@ -9,17 +9,17 @@ public class ExplosionShot : IShooterType
     private readonly LayerMask _mask;
 
     private IRaycaster _raycaster;
-    
-    public Vector3 HitPosition { get; private set; }
-    public float Radius => _explosionRadius;
 
-    public ExplosionShot(Camera camera, LayerMask groundMask, IRaycaster raycaster, float explosionRadius, float explosionForce)
+    public ExplosionShooter(Camera camera, LayerMask groundMask, IRaycaster raycaster, float explosionRadius, float explosionForce)
     {
         _raycaster = raycaster;
         _mask = groundMask;
         _explosionRadius = explosionRadius;
         _explosionForce = explosionForce;
     }
+
+    public Vector3 HitPosition { get; private set; }
+    public float Radius => _explosionRadius;
 
     public void Shoot(Ray ray)
     {

@@ -1,58 +1,50 @@
 using UnityEngine;
 
-public class DragSystem : MonoBehaviour
+public class DragSystem
 {
-    [SerializeField] private Camera _camera;
-    [SerializeField] private LayerMask _targetMask;
-    [SerializeField] private LayerMask _groundMask;
-
-    private IInput _input;
+    private LayerMask _groundMask;
     private IRaycaster _raycaster;
     private ITargetSelector _targetSelector;
-    private IDragable _dragable;
 
-    private void Awake()
+    public DragSystem(LayerMask targetMask, LayerMask groundMask)
     {
-        _input = new MouseInput(_camera);
         _raycaster = new Raycaster();
-        _targetSelector = new RaycastTargetSelector(_raycaster, _targetMask);
+        _targetSelector = new RaycastTargetSelector(_raycaster, targetMask);
+        _groundMask = groundMask;
     }
 
-    private void Update()
-    {
-        if (_input.IsDown)
-        {
-            _targetSelector.TrySelect(_input.PointerRay);
+    public IDragable Dragable {  get; private set; }
 
-            if (_targetSelector.Target != null)
-            {
-                _dragable = _targetSelector.Target.GetComponent<IDragable>();
-
-                if (_dragable != null)
-                _dragable.Enter();
-            }
-        }
-
-        if (_input.IsUp)
-        {
-            if (_dragable != null)
-            {
-                _dragable.Exit();
-            }
-            _dragable = null;
-            _targetSelector.Clear();
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (_targetSelector.Target != null)
-            MoveTo(_input.PointerRay, _dragable);
-    }
-
-    private void MoveTo(Ray ray, IDragable target)
+    public void MoveTo(Ray ray, IDragable target)
     {
         if (_raycaster.Raycast(ray, _groundMask, out RaycastHit hitInfo))
             target.Drag(hitInfo.point);
     }
+
+    public void StartDrag(Ray ray)
+    {
+        _targetSelector.TrySelect(ray);
+
+        if (_targetSelector.Target != null)
+        {
+            Dragable = _targetSelector.Target.GetComponent<IDragable>();
+
+            if (Dragable != null)
+            {
+                Dragable.Enter();
+            }
+        }
+    }
+
+    public void EndDrag()
+    {
+        if (Dragable != null)
+        {
+            Dragable.Exit();
+        }
+        Dragable = null;
+        _targetSelector.Clear();
+    }
+
+    public bool HasTarget() => _targetSelector.Target != null;
 }

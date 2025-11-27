@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private KeyCode _switchKey = KeyCode.V;
     [SerializeField] private List<CinemachineVirtualCamera> _cameras;
 
     private CameraSwitcher _switcher;
-    private CameraInputReader _inputReader;
+    private IInput _input;
 
     private void Awake()
     {
         _switcher = new CameraSwitcher(_cameras);
-        _inputReader = new CameraInputReader(_switchKey);
+        _input = new DesktopInput();
+
     }
 
     private void Update()
     {
-        if (_inputReader.IsSwitchPressed)
+        if (_input.IsSwitchPressed)
             _switcher.SelectNextCamera();
     }
 }
