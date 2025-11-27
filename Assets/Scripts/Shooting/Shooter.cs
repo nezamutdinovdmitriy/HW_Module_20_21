@@ -6,7 +6,7 @@ public class Shooter : MonoBehaviour
     private IShooterView _shooterView;
     private IInput _input;
 
-    public void Initialized(IShooterType shooterType, IShooterView shooterView, IInput input)
+    public void Initialize(IShooterType shooterType, IShooterView shooterView, IInput input)
     {
         _shooterType = shooterType;
         _shooterView = shooterView;

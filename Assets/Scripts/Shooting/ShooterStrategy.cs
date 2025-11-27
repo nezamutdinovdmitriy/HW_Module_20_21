@@ -22,7 +22,7 @@ public class ShooterStrategy : MonoBehaviour
                 _shooterView = new ExplosionShotView(_particleSystemPrefabs);
                 _input = new MouseInput(_camera);
 
-                _shooterUser.Initialized(_shooter, _shooterView, _input);
+                _shooterUser.Initialize(_shooter, _shooterView, _input);
                 break;
         }
     }
