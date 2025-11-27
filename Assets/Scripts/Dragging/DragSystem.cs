@@ -9,7 +9,6 @@ public class DragSystem : MonoBehaviour
     private IInput _input;
     private IRaycaster _raycaster;
     private ITargetSelector _targetSelector;
-    private IMover _targetMover;
     private IDragable _dragable;
 
     private void Awake()
@@ -17,7 +16,6 @@ public class DragSystem : MonoBehaviour
         _input = new MouseInput(_camera);
         _raycaster = new Raycaster();
         _targetSelector = new RaycastTargetSelector(_raycaster, _targetMask);
-        _targetMover = new GroundRaycastMover(_raycaster, _groundMask);
     }
 
     private void Update()
@@ -49,6 +47,12 @@ public class DragSystem : MonoBehaviour
     private void FixedUpdate()
     {
         if (_targetSelector.Target != null)
-            _targetMover.MoveTo(_input.PointerRay, _dragable);
+            MoveTo(_input.PointerRay, _dragable);
+    }
+
+    private void MoveTo(Ray ray, IDragable target)
+    {
+        if (_raycaster.Raycast(ray, _groundMask, out RaycastHit hitInfo))
+            target.Drag(hitInfo.point);
     }
 }
