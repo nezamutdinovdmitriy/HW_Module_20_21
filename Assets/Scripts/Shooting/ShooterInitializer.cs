@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class ShooterStrategy : MonoBehaviour
+public class ShooterInitializer : MonoBehaviour
 {
     [SerializeField] private ShooterController _shooterUser;
     [SerializeField] private Camera _camera;
     [SerializeField] private ParticleSystem _particleSystemPrefabs;
+    [SerializeField] private float _radius;
 
     [SerializeField] private LayerMask _groundMask;
 
@@ -13,10 +14,11 @@ public class ShooterStrategy : MonoBehaviour
     private IInput _input;
     private PointerRayProvider _pointerRayProvider;
 
+
     private void Awake()
     {
-        _shooter = new ExplosionShooter(_camera, _groundMask, new Raycaster(), 5, 10);
-        _shooterView = new ExplosionShotView(_particleSystemPrefabs, _shooter);
+        _shooter = new ExplosionShooter(_camera, _groundMask, new Raycaster(), _radius, 10);
+        _shooterView = new ExplosionShooterView(_particleSystemPrefabs, _radius);
         _input = new DesktopInput();
         _pointerRayProvider = new PointerRayProvider(_camera);
 

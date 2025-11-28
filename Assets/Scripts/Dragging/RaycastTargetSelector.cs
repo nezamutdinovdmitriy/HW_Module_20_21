@@ -11,21 +11,15 @@ public class RaycastTargetSelector : ITargetSelector
         _mask = mask;
     }
 
-    public Transform Target { get; private set; }
-
-    public void Clear()
-    {
-        Target = null;
-    }
-
-    public bool TrySelect(Ray ray)
+    public bool TrySelect(Ray ray, out Transform target)
     {
         if(_raycaster.Raycast(ray, _mask, out RaycastHit hitInfo))
         {
-            Target = hitInfo.transform;
+            target = hitInfo.transform;
             return true;
         }
 
+        target = null;
         return false;
     }
 }

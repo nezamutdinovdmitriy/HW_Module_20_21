@@ -6,6 +6,8 @@ public class DragSystem
     private IRaycaster _raycaster;
     private ITargetSelector _targetSelector;
 
+    private Transform _target;
+
     public DragSystem(LayerMask targetMask, LayerMask groundMask)
     {
         _raycaster = new Raycaster();
@@ -23,28 +25,22 @@ public class DragSystem
 
     public void StartDrag(Ray ray)
     {
-        _targetSelector.TrySelect(ray);
-
-        if (_targetSelector.Target != null)
+        if(_targetSelector.TrySelect(ray, out _target))
         {
-            Dragable = _targetSelector.Target.GetComponent<IDragable>();
+            Dragable = _target.GetComponent<IDragable>();
 
             if (Dragable != null)
-            {
                 Dragable.Enter();
-            }
         }
     }
 
     public void EndDrag()
     {
         if (Dragable != null)
-        {
             Dragable.Exit();
-        }
+
         Dragable = null;
-        _targetSelector.Clear();
     }
 
-    public bool HasTarget() => _targetSelector.Target != null;
+    public bool HasTarget() => Dragable != null;
 }

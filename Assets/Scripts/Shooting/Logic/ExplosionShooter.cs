@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ExplosionShooter : IShooter
 {
@@ -9,7 +10,6 @@ public class ExplosionShooter : IShooter
     private readonly LayerMask _mask;
 
     private IRaycaster _raycaster;
-
     public ExplosionShooter(Camera camera, LayerMask groundMask, IRaycaster raycaster, float explosionRadius, float explosionForce)
     {
         _raycaster = raycaster;
@@ -18,14 +18,13 @@ public class ExplosionShooter : IShooter
         _explosionForce = explosionForce;
     }
 
-    public Vector3 HitPosition { get; private set; }
     public float Radius => _explosionRadius;
 
-    public void Shoot(Ray ray)
+    public void Shoot(Ray ray, out RaycastHit hit)
     {
         if (_raycaster.Raycast(ray, _mask, out RaycastHit hitInfo))
         {
-            HitPosition = hitInfo.point;
+            hit = hitInfo;
 
             Collider[] targets = Physics.OverlapSphere(hitInfo.point, _explosionRadius);
 
@@ -35,13 +34,17 @@ public class ExplosionShooter : IShooter
                 {
                     Vector3 direction = (target.transform.position - hitInfo.point).normalized;
 
-                    float distance = Vector3.Distance(target.transform.position, HitPosition);
+                    float distance = Vector3.Distance(target.transform.position, hit.point);
 
                     float multiplier = MaxMultiplier - Mathf.Clamp01(distance / _explosionRadius);
 
                     pushableTarget.Push(direction, _explosionForce * multiplier);
                 }
             }
+        }
+        else
+        {
+            hit = default;
         }
     }
 }

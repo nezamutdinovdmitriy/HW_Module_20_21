@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class ShooterController : MonoBehaviour
 {    
-    private IShooter _shooterType;
+    private IShooter _shooter;
     private IShooterView _shooterView;
     private IInput _input;
     private PointerRayProvider _pointerRayProvider;
 
-    public void Initialize(IShooter shooterType, IShooterView shooterView, IInput input, PointerRayProvider pointerRayProvider)
+    private RaycastHit _raycastHit;
+
+    public void Initialize(IShooter shooter, IShooterView shooterView, IInput input, PointerRayProvider pointerRayProvider)
     {
-        _shooterType = shooterType;
+        _shooter = shooter;
         _shooterView = shooterView;
         _input = input;
         _pointerRayProvider = pointerRayProvider;
@@ -19,8 +21,8 @@ public class ShooterController : MonoBehaviour
     {
         if (_input.IsShot)
         {
-            _shooterType.Shoot(_pointerRayProvider.Ray);
-            _shooterView.PlayEffect(_shooterType.HitPosition, );
+            _shooter.Shoot(_pointerRayProvider.Ray, out _raycastHit);
+            _shooterView.PlayEffect(_raycastHit.point);
         }
     }
 }
