@@ -3,6 +3,7 @@ using UnityEngine;
 public class ExplosionShooterView : IShooterView
 {
     private const float ReferenceParticleRadius = 5f;
+    
     private float _radius;
     private ParticleSystem _explosionVFX;
 
@@ -17,8 +18,9 @@ public class ExplosionShooterView : IShooterView
         ParticleSystem explosion = Object.Instantiate(_explosionVFX, position, Quaternion.identity);
 
         float scaleValue = _radius / ReferenceParticleRadius;
-
+        
         explosion.transform.localScale = Vector3.one * scaleValue;
+
         explosion.Play();
     }
 }

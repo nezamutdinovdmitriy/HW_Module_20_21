@@ -2,18 +2,16 @@ using UnityEngine;
 
 public class ShooterInitializer : MonoBehaviour
 {
-    [SerializeField] private ShooterController _shooterUser;
     [SerializeField] private Camera _camera;
+    [SerializeField] private ShooterController _shooterUser;
     [SerializeField] private ParticleSystem _particleSystemPrefabs;
-    [SerializeField] private float _radius;
-
     [SerializeField] private LayerMask _groundMask;
+    [SerializeField] private float _radius;
 
     private IShooter _shooter;
     private IShooterView _shooterView;
     private IInput _input;
     private PointerRayProvider _pointerRayProvider;
-
 
     private void Awake()
     {

@@ -13,7 +13,6 @@ public class CameraController : MonoBehaviour
     {
         _switcher = new CameraSwitcher(_cameras);
         _input = new DesktopInput();
-
     }
 
     private void Update()

@@ -3,12 +3,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class RigidbodyDragable : MonoBehaviour, IDragable
 {
-    private Rigidbody _rigidbody;
-    private bool _isKinematic;
-
     [SerializeField] private float _frequency = 1f;
     [SerializeField] private float _amplitude = 0.3f;
     [SerializeField] private float _startOffsetY = 1.5f;
+
+    private Rigidbody _rigidbody;
+    private bool _isKinematic;
 
     public Vector3 Position { get; private set; }
 

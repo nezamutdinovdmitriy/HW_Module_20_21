@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public interface IInput
 {
     public bool IsDragStarted { get; }

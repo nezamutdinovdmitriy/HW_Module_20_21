@@ -10,6 +10,7 @@ public class ExplosionShooter : IShooter
     private readonly LayerMask _mask;
 
     private IRaycaster _raycaster;
+
     public ExplosionShooter(Camera camera, LayerMask groundMask, IRaycaster raycaster, float explosionRadius, float explosionForce)
     {
         _raycaster = raycaster;

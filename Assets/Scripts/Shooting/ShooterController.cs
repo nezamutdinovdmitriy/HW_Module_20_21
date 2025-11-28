@@ -1,13 +1,13 @@
 using UnityEngine;
 
 public class ShooterController : MonoBehaviour
-{    
+{
+    private PointerRayProvider _pointerRayProvider;
+    private RaycastHit _raycastHit;
+
     private IShooter _shooter;
     private IShooterView _shooterView;
     private IInput _input;
-    private PointerRayProvider _pointerRayProvider;
-
-    private RaycastHit _raycastHit;
 
     public void Initialize(IShooter shooter, IShooterView shooterView, IInput input, PointerRayProvider pointerRayProvider)
     {

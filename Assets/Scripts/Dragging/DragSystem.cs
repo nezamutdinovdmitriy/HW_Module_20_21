@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class DragSystem
 {
+    private Transform _target;
     private LayerMask _groundMask;
+
     private IRaycaster _raycaster;
     private ITargetSelector _targetSelector;
-
-    private Transform _target;
 
     public DragSystem(LayerMask targetMask, LayerMask groundMask)
     {
