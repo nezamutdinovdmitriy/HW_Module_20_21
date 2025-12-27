@@ -29,6 +29,6 @@ public class DragSystemController : MonoBehaviour
     private void FixedUpdate()
     {
         if (_dragSystem.HasTarget())
-            _dragSystem.MoveTo(_rayProvider.Ray, _dragSystem.Dragable);
+            _dragSystem.MoveTo(_rayProvider.Ray);
     }
 }

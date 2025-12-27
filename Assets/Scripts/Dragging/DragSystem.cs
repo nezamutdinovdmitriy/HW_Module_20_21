@@ -17,10 +17,13 @@ public class DragSystem
 
     public IDragable Dragable {  get; private set; }
 
-    public void MoveTo(Ray ray, IDragable target)
+    public void MoveTo(Ray ray)
     {
+        if (Dragable == null)
+            return;
+
         if (_raycaster.Raycast(ray, _groundMask, out RaycastHit hitInfo))
-            target.Drag(hitInfo.point);
+            Dragable.Drag(hitInfo.point);
     }
 
     public void StartDrag(Ray ray)
